@@ -1,0 +1,100 @@
+<template name="rssLinks">
+    <legend>
+        <h5>Rss Links Management Page</h5>
+    </legend>
+    <div class="col-xs-12 no-padd">
+        <div class="form">
+            <div class="row">
+                <div class="col-xs-12">
+                    <form id="rssLinkForm">
+                        <div class="col-sm-3 no-padd">
+                            <input type="text" class="form-control" id="keyword" placeholder="keyword">
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="link" placeholder="Link">
+                        </div>
+                        <div class="col-sm-4 no-padd">
+                            <select type="text" class="form-control" id="user">
+                                <option value="">Select a user</option>
+                                {{#each users}}
+                                    <option value="{{_id}}">{{profile.name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="col-sm-1">
+                            <button class="btn btn-block">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12">
+    </div>
+    <div class="col-xs-12 top-20">
+        <label class="bold">Note :</label> <label>All "<label class="fred1">inactive</label>" rss links will be skipped during alert fetching process.</label><br/>
+        <div class="col-xs-12 no-padd">
+            <div class="col-xs-6 col-sm-4">
+                <select class="form-control" id="recordLimit" style="max-width:200px;">
+                    <option>5</option>
+                    <option>10</option>
+                    <option>20</option>
+                    <option>50</option>
+                    <option>100</option>
+                </select>
+            </div>
+            <div class="col-sm-4">
+                <form id="searchForm">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Search">
+                </form>
+            </div>
+            <div class="col-xs-6 col-sm-4">
+                <label class="pull-right">Page <strong id="actualPage">1</strong> of <strong id="totalPage">2</strong></label>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 top-10">
+        <div class="table-responsive">
+            <table id="rssLinkTable" class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>Keyword</th>
+                        <th>Status</th>
+                        <th>Created By</th>
+                        <th>Assigned To</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {{>spinner}}
+                    {{#each rssLinks}}
+                        <tr>
+                            <td>
+                                <label id="view_keyword">{{keyword}}</label>
+                            </td>
+                            <td>
+                                {{#if isEqual status 'active'}}
+                                    <label class="fgreen5">{{status}}</label>
+                                {{else}}
+                                    <label class="fred1">{{status}}</label>
+                                {{/if}}
+                            </td>
+                            <td>{{createdByName}} (<small><em>{{formatDate createdAt}}</em></small>)</td>
+                            <td>{{assignedToName}}</td>
+                            <td>
+                                <button id="{{link}}" class="statusButton btn btn-xs" title="Toggle RSS Link Status"> <i class="fa fa-refresh"></i></button>
+                                <button id="{{link}}" class="deleteButton btn btn-xs" title="Delete RSS Link"> <i class="fa fa-remove"></i></button>
+                                <button id="{{link}}" class="viewButton btn btn-xs" title="Visit link"> <i class="fa fa-eye"></i></button>
+                                <a href="{{link}}" class="btn btn-xs fblue5" title="Visit link"> <i class="fa fa-external-link"></i></a>
+                            </td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+        <ul class="pager">
+            <li><a id="prevPage" class="point">Previous</a></li>
+            <li><a id="nextPage" class="point">Next</a></li>
+        </ul>
+    </div>
+</template>

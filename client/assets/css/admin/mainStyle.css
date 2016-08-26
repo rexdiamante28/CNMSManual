@@ -1,0 +1,99 @@
+.adminBody{
+    max-width: 1200px;
+    min-height: 90vh;
+    margin: 50px auto 100px;
+    margin: 50px auto 100px;
+    background-color: rgba(255,255,255,.7);
+    padding: 20px;
+    height: auto;
+}
+.form input, .form select{
+    background-color: rgba(48,53,147,.7);
+    color: white;
+    padding-left: 10px !important;
+}
+
+.form{
+    background-color: rgba(255,255,255,.3);
+    padding: 10px;
+}
+
+.gauge{
+    background: #3B5D5E; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(-90deg, #3B5D5E, #96BF9F); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(-90deg, #3B5D5E, #96BF9F); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(-90deg, #3B5D5E, #96BF9F); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(-90deg, #3B5D5E, #96BF9F); /* Standard syntax */
+}
+
+.monitoring{
+    max-width: 100%;
+    min-height: 100vh;
+    padding: 15px 0;
+    height: auto;
+
+}
+.monitoring-panel-violet{
+    width: 100%;
+    background-color: rgba(45,49,144,.8);
+    color: white;
+}
+
+.monitoring-panel-orange{
+    width: 100%;
+    background-color: rgba(226,122,19,.8);
+    color: white;
+}
+.monitoring label{
+    line-height: 100%;
+}
+
+.large-numbers-1{
+    font-size: 280px;
+    line-height: 100%;
+}
+.large-numbers-2{
+    font-size: 200px;
+    line-height: 100%;
+}
+
+.large-numbers-2_5{
+    font-size: 180px;
+    line-height: 100%;
+}
+.large-numbers-3{
+    font-size: 100px;
+    line-height: 100%;
+}
+
+.large-numbers-3_5{
+    font-size: 80px;
+    line-height: 100%;
+}
+
+.large-numbers-4{
+    font-size: 50px;
+    line-height: 100%;
+}
+
+.large-numbers-5{
+    font-size: 30px;
+    line-height: 100%;
+}
+.compressed label{
+    line-height: 0px;
+}
+
+.frame{
+    width: 100%;
+    height: 100vh;
+}
+
+.avatarHolder
+{
+    max-width: 150px;
+}
+
+.thumbimg{
+    max-width: 25px !important;
+}

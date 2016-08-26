@@ -1,0 +1,67 @@
+if(Meteor.isServer){
+    Meteor.startup(function(){
+        if(Users.find({}).count()===0){
+            Users.insert({
+                username: "admin",
+                password: "admin",
+                name: "Rex Diamante"
+            })
+        }
+    })
+
+
+    //var feedData = Scrape.feed('http://localhost/hhh/xml.xml');
+
+    //console.log(feedData);
+
+    //for(var a = 0; a<feedData.items.length; a++)
+    //{
+
+       // console.log(a+"  item number"+feedData.items[a].id);
+        //console.log("Link "+feedData.items[a].link);
+       // console.log("title "+feedData.items[a].title);
+        //console.log("content "+feedData.items[a].content);
+        //console.log("author "+feedData.items[a].author);
+        //console.log("\n\n");
+    //}
+
+
+    Meteor.methods({
+        'getUpdates': function(){
+            //var feedData = Scrape.url('http://localhost/hhh/xml.xml');
+            //console.log(feedData);
+
+            var links = [
+                "https://www.google.com.ph/alerts/feeds/08152247137224499184/11329349036589589631",
+                "https://www.google.com.ph/alerts/feeds/08152247137224499184/17325130624416466507",
+                "https://www.google.com.ph/alerts/feeds/08152247137224499184/18285687025009575599"
+            ];
+
+            for(var b = 0; b<links.length; b++){
+                Meteor.call('updateAlert',links[b]);
+            }
+
+        },
+        'updateAlert':function(link){
+                HTTP.call('GET',
+                    link,
+                    {},
+                    function(callError,callResponse){
+
+                        json = xml2js.parseString(callResponse.content, function (jsError, jsResult) {
+                            if(jsError){
+                                console.error('errors',jsError);
+                            }
+                            if(jsResult.feed.entry.length>0){
+                                for(var a = 0; a<jsResult.feed.entry.length;a++){
+                                    console.log(jsResult.feed.entry[a].title[0]._);
+                                }
+                            }
+                        });
+                    }
+                );
+        }
+    })
+
+
+}

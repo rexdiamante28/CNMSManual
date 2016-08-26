@@ -1,0 +1,54 @@
+<template name="monitoring">
+    <div class="col-xs-12 monitoring-panel-violet" style="min-height: 15vh;background-color: white;">
+        <div class="col-sm-7">
+            <img src="/images/emoticons/cnms-logo.png">
+        </div>
+        <div class="col-sm-5">
+            <img src="/images/emoticons/datagen-logo.png" class="col-xs-12">
+        </div>
+    </div>
+    <div class="col-sm-4 top-10" style="padding-right: 0px;">
+        <div class="monitoring-panel-violet" style="min-height: 50vh">
+            <div class="col-sm-12 text-center top-100">
+                <label ><strong class="large-numbers-1" id="newAlerts"></strong></label><br/>
+                <label  class="_30">UNPROCESSED ALERTS</label>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4 top-10" >
+        {{>spinner}}
+        <div class="monitoring-panel-violet" style="min-height: 50vh">
+            <img id="emoticon" src="/images/emoticons/smile.png" style="width: 50vh; margin: 0 auto; display:block">
+        </div>
+    </div>
+    <div class="col-sm-4 top-10" style="padding-left: 0px;">
+        <div class="monitoring-panel-orange" style="min-height: 50vh">
+            <div class="col-sm-6 text-center top-30">
+                <label class="_30">Next update in</label><br/>
+                <label class="large-numbers-3"><strong class="large-numbers-2" id="nextUpdate"></strong></label><br/>
+                <label class="_30" id="timerUnit">Minutes</label>
+            </div>
+            <div class="col-sm-6 compressed text-center">
+                <div class="monitoring-panel-violet top-20 padd-20">
+                    <label class="_23 top-10">Last update</label><br/>
+                    <label class="large-numbers-2"><strong class="large-numbers-3" id="lastFetchedNumber"></strong></label>
+                </div>
+                <div class="monitoring-panel-violet top-20 padd-20">
+                    <label class="_23 top-10">Alerts Today</label><br/>
+                    <label class="large-numbers-2"><strong class="large-numbers-3" id="fetchedToday"></strong> </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 top-10">
+        <div class="monitoring-panel-violet" style="min-height: 27.5vh;max-height: 27.5vh; overflow-y:auto;">
+            <h1 class="large-numbers-3 fwhite text-center">Under Construction</h1>
+            {{#each recentALerts}}
+                <div class="col-sm-4">
+                    <label class="_30">{{keyword}}</label> <strong><label class="_30 pull-right blink">{{numberOfAlerts}}</label></strong>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</template>

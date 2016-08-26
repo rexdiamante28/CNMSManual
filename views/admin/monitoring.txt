@@ -1,0 +1,61 @@
+ <div class="monitoring">
+        <div class="col-sm-8" style="padding-right: 0px;">
+            <div class="monitoring-panel-violet" style="min-height:45vh">
+                <div class="col-sm-8 text-center">
+                    <label class="large-numbers-1"><strong>{{newAlerts}}</strong></label><br/>
+                    <label  class="_30">UNPROCESSED ALERTS</label>
+                </div>
+                <div class="col-sm-4 padd-5" style="background-color: white; height: 45vh;">
+                    <img src="/images/emoticons/{{emoticons}}" class="col-xs-12 top-30">
+                </div>
+            </div>
+            <div class="monitoring-panel-violet top-10" style="min-height: 50.2vh">
+                <div class="col-xs-12">
+                    <label class="_23 top-20">Recent Alerts</label><br/>
+                    <div class="table-responsive _17">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Keyword</th>
+                                    <th>Title</th>
+                                    <th>Link</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each recentALerts}}
+                                    <tr>
+                                        <td>{{keyword}}</td>
+                                        <td>{{{StringLimit 70 title}}}</td>
+                                        <td><a class="btn btn-xs btn-default" href="{{link}}"><i class="fa fa-external-link"></i></a></td>
+                                    </tr>
+                                {{/each}}
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="monitoring-panel-orange"  style="min-height: 31vh;">
+                <div class="col-xs-12 text-center">
+                    <label class="_23 top-10">Next update in</label><br/>
+                    <label class="large-numbers-3"><strong class="large-numbers-2">{{msToM serverStatus.fetchingIn}}</strong>Mins</label>
+                </div>
+            </div>
+            <div class="monitoring-panel-orange top-10"  style="min-height: 31vh;">
+                <div class="col-xs-12 text-center">
+                    <label class="_23 top-10">Last update</label><br/>
+                    <label class="_19">{{formatDateNow serverStatus.lastFetch "MM-DD-YY"}}</label>
+                    <label class="_19">{{formatDateNow serverStatus.lastFetch "hh:mm:ss a"}}</label><br/>
+                    <label class="large-numbers-2"><strong class="large-numbers-2_5">{{serverStatus.lastFetchedNumber}}</strong> </label>
+                </div>
+            </div>
+            <div class="monitoring-panel-orange top-10"  style="min-height: 32vh;">
+                <div class="col-xs-12 text-center">
+                    <label class="_23 top-10">Alerts Today</label><br/>
+                    <label class="large-numbers-2"><strong class="large-numbers-2_5">{{serverStatus.fetchedToday}}</strong> </label>
+                </div>
+            </div>
+        </div>
+    </div>

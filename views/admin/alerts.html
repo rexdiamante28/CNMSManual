@@ -1,0 +1,46 @@
+<template name="alerts">
+    <div class="col-xs-12 no-padd">
+        <legend>
+            RSS Alerts
+        </legend>
+        <div class="col-xs-12 top-20 no-padd">
+            <label class="bold">Note :</label> <label>All keywords in"<label class="fred1">red</label>" are inactive rss links. These links will be skipped during alert fetching process. to activate, visit <a class="fgreen5 fhovergreen5" href="/user/rsslinks">this page</a></label>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>Keyword</th>
+                                <th>Unsorted</th>
+                                <th>Relevant</th>
+                                <th>Irrelevant</th>
+                                <th>Link</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each RssLinks}}
+                                <tr>
+                                    <td>
+                                        {{#if isEqual status "active"}}
+                                            <label>{{keyword}}</label>
+                                        {{else}}
+                                            <label class="fred1">{{keyword}}</label>
+                                        {{/if}}
+                                    </td>
+                                    <td><button id="{{link}}" title="View alerts" class="btn btn-xs  btn-green view-alert-unsorted">{{unsorted}}</button></td>
+                                    <td><button id="{{link}}" title="View alerts" class="btn btn-xs btn-green view-alert-relevant">{{relevant}}</button></td>
+                                    <td><button id="{{link}}" title="View alerts" class="btn btn-xs btn-green view-alert-irrelevant">{{irrelevant}}</button></td>
+                                    <td>
+                                       <a title="view feed" class="btn btn-xs fblue5" target="_blank" href="{{link}}"><i class="fa fa-external-link"></i></a>
+                                    </td>
+                                </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

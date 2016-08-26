@@ -1,0 +1,56 @@
+<template name="ratings">
+    <div class="col-xs-12 no-padd">
+        <legend>
+            <div class="row">
+                <div class="col-xs-12">
+                    Ratings
+                    <a href="newratings" class="btn btn-primary pull-right btn-sm">Add New</a>
+                </div>
+            </div>
+        </legend>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                        </thead>
+                        <tbody>
+                            {{#each ratings}}
+                                    <tr>
+                                        <td>{{name}}</td>
+                                        <td>{{{description}}}</td>
+                                        <td>
+                                            <a class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                                            <a class="btn btn-primary btn-xs"><i class="fa fa-remove"></i></a>
+                                        </td>
+                                    </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+
+<template name="newratings">
+    <div class="col-xs-12 no-padd">
+        <legend>
+            <div class="row">
+                <div class="col-xs-12">
+                    New Rating
+                    <a class="btn btn-primary btn-sm pull-right" href="ratings">Back</a>
+                </div>
+            </div>
+        </legend>
+        <div class="row">
+            <div class="col-xs-12">
+                {{> quickForm collection="Ratings"  id="insertratings" type="insert"}}
+            </div>
+        </div>
+    </div>
+</template>

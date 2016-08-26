@@ -1,0 +1,185 @@
+<template name="news">
+    <div class="col-xs-12 no-padd">
+        <legend>
+            <div class="row">
+                <div class="col-xs-12">
+                    News
+                    <a href="categoryselect" class="btn btn-primary pull-right btn-sm">Add New</a>
+                    <a href="printsetup" class="btn btn-primary pull-right btn-sm">Print Report</a>
+                    <button id="advancebutton" class="btn btn-primary pull-right btn-sm">Advanced Filter</button>
+                </div>
+            </div>
+        </legend>
+        <form id="advance">
+        <div class="col-xs-12 top-20 no-padd bottom-20 bgwhite-trans padd-10" id="advancedfilters">
+            <div class="col-xs-12">
+                <div class="col-md-3 col-sm-4">
+                    <div class="form-group">
+                        <label>From Date</label>
+                        <input type="date" class="form-control" id="dateFrom"/>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <div class="form-group">
+                        <label>To Date</label>
+                        <input type="date" class="form-control" id="dateTo"/>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select class="form-control" id="category">
+                            <option value="">Select one</option>
+                            {{#each categories}}
+                                <option value="{{name}}">{{name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <div class="form-group">
+                        <label>Publication</label>
+                        <select class="form-control" id="publication">
+                            <option value="">Select one</option>
+                            {{#each publications}}
+                                <option value="{{name}}">{{name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <div class="form-group">
+                        <label>Rating</label>
+                        <select class="form-control" id="rating">
+                            <option value="">Select one</option>
+                            {{#each ratings}}
+                                <option value="{{name}}">{{name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <button type="submit" class="btn btn-primary pull-right">Search</button>
+                </div>
+            </div>
+        </div>
+        </form>
+        <div class="col-xs-12 top-20 no-padd bottom-20">
+            <div class="col-xs-12 no-padd">
+                <div class="col-xs-6 col-sm-4">
+                    <select class="form-control" id="recordLimit" style="max-width:200px;">
+                        <option>5</option>
+                        <option selected="true">10</option>
+                        <option>20</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <form id="searchForm">
+                        <input type="text" id="searchInput" class="form-control" placeholder="Search">
+                    </form>
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <label class="pull-right">Page <strong id="actualPage">1</strong> of <strong id="totalPage">2</strong></label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                {{>spinner}}
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <th>Publication</th>
+                        <th>Page</th>
+                        <th>Headline</th>
+                        <th>Rate</th>
+                        <th>Comments</th>
+                        <th>Actions</th>
+                        </thead>
+                        <tbody>
+                        {{#each news}}
+                            <tr>
+                                <td>{{publicationName}}</td>
+                                <td>{{page}}</td>
+                                <td>
+                                    <a href="{{link}}"><label>{{title}}</label></a>
+                                    <p>{{StringLimit 40 summary}}</p>
+                                </td>
+                                <td>{{rating}}</td>
+                                <td>{{comments}}</td>
+                                <td>
+                                    <a class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-primary btn-xs"><i class="fa fa-remove"></i></a>
+                                </td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+                <ul class="pager">
+                    <li><a id="prevPage" class="point">Previous</a></li>
+                    <li><a id="nextPage" class="point">Next</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</template>
+
+
+<template name="newnews">
+    <div class="col-xs-12 no-padd">
+        <legend>
+            <div class="row">
+                <div class="col-xs-12">
+                    New News Report
+                    <a href="news" class="btn btn-primary pull-right btn-sm">back</a>
+                    <a href="textparser" class="btn btn-primary pull-right btn-sm">Use Text Parser</a>
+                </div>
+            </div>
+        </legend>
+        <div class="row">
+            <div class="col-sm-8">
+                {{#autoForm collection="News" id="insertnews" type="insert"}}
+                    <fieldset>
+                        <div class="col-sm-6">
+                            {{> afQuickField name='publicationId' value=publication type='hidden' }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{> afQuickField name='categoryId' value=category  type='hidden' }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{> afQuickField name='ratingId' }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{> afQuickField name='page' }}
+                        </div>
+                        <div class="col-sm-12">
+                            {{> afQuickField name='isHeadline' }}
+                        </div>
+                        <div class="col-sm-12">
+                            {{> afQuickField name='title' }}
+                        </div>
+                        <div class="col-sm-12">
+                            {{> afQuickField name='link' }}
+                        </div>
+                        <div class="col-sm-12">
+                            {{> afQuickField name='summary' }}
+                        </div>
+                        <div class="col-sm-12">
+                            {{> afQuickField name='comments' }}
+                        </div>
+                        <div class="col-sm-3">
+                            <button type="submit" class="btn btn-primary btn-block" style="margin-top: 25px;">Submit</button>
+                        </div>
+                    </fieldset>
+
+                {{/autoForm}}
+            </div>
+            <div class="col-sm-4 top-20">
+                <textarea class="form-control" style="min-height:500px;"></textarea>
+            </div>
+        </div>
+    </div>
+</template>

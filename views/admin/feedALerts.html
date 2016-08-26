@@ -1,0 +1,97 @@
+<template name="feedAlerts">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="btn-group">
+                <div class="btn-group">
+                    <button id="filter-unsorted" type="button" class="btn btn-sm btn-green">Unsorted</button>
+                </div>
+                <div class="btn-group">
+                    <button id="filter-relevant-positive" type="button" class="btn btn-sm btn-green">Relevant <i class="fa fa-plus fgreen5"></i></button>
+                </div>
+                <div class="btn-group">
+                    <button id="filter-relevant-negative" type="button" class="btn btn-sm btn-green">Relevant <i class="fa fa-minus fred1"></i></button>
+                </div>
+                <div class="btn-group">
+                    <button id="filter-irrelevant" type="button" class="btn btn-sm btn-green">Irrelevant</button>
+                </div>
+                <div class="btn-group">
+                    <a href="/user/rssLinks" type="button" class="btn btn-sm btn-green"><i class="fa fa-arrow-left"></i> Back</a>
+                </div>
+            </div>
+
+
+            <legend class="top-20">
+                {{Info.status}}
+                {{#if isEqual Info.status 'unsorted'}}
+                    <label class="normal fgray2 _15">Showing <strong class="fgreen5">unsorted</strong> alert results for <strong>"{{Info.keyword}}"</strong></label>
+                {{/if}}
+                {{#if isEqual Info.status 'relevant'}}
+                    <label class="normal fgray2 _15">Showing <strong class="fgreen5">relevant</strong> alert results for <strong>"{{Info.keyword}}"</strong></label>
+                {{/if}}
+                {{#if isEqual Info.status 'irrelevant'}}
+                    <label class="normal fgray2 _15">Showing <strong class="fgreen5">irrelevant</strong> alert results for <strong>"{{Info.keyword}}"</strong></label>
+                {{/if}}
+            </legend>
+
+            <div class="col-xs-12 top-20 no-padd">
+                <div class="col-xs-12 no-padd">
+                    <div class="col-xs-6 col-sm-4">
+                        <select class="form-control" id="recordLimit" style="max-width:200px;">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <form id="searchForm">
+                            <input type="text" id="searchInput" class="form-control" placeholder="Search">
+                        </form>
+                    </div>
+                    <div class="col-xs-6 col-sm-4">
+                        <label class="pull-right">Page <strong id="actualPage">1</strong> of <strong id="totalPage">2</strong></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{>spinner}}
+    <div class="table-responsive">
+        {{#if isEqual Info.count 0}}
+            <div class="text-center col-xs-12 top-100">
+                <label class="bold fgray3">No Result Available</label>
+            </div>
+        {{else}}
+            <table id="alertsTable" class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Date Published</th>
+                    <th>Date Updated</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each Alerts}}
+                    <tr>
+                        <td><a class="alert-link" id="{{alertId}}" target="_blank" href="{{link}}">{{{StringLimit 50 title}}}</a></td>
+                        <td>{{formatDate published}}</td>
+                        <td>{{formatDate updated}}</td>
+                        <td>
+                            <a href="/user/alerts/logs"><button title="Logs" class="btn btn-xs logs" id="{{alertId}}"><i class="fa fa-list"></i></button></a>
+                            <button title="relevant positive" class="btn btn-xs btn-success  relevant-positive-button" id="{{alertId}}"><i class="fa fa-thumbs-up"></i></button>
+                            <button title="relevant negative" class="btn btn-xs btn-danger  relevant-negative-button" id="{{alertId}}"><i class="fa fa-thumbs-up"></i></button>
+                            <button title="irrelevant" class="btn btn-xs  irrelevant-button" id="{{alertId}}"><i class="fa fa-thumbs-down"></i></button>
+                        </td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        {{/if}}
+    </div>
+    <ul class="pager">
+        <li><a id="prevPage" class="point">Previous</a></li>
+        <li><a id="nextPage" class="point">Next</a></li>
+    </ul>
+</template>
