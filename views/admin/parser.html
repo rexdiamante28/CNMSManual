@@ -10,20 +10,22 @@
             </div>
         </legend>
         <div class="row">
-            <div class="col-xs-12">
-                <div class="col-sm-6">
-                    <input type="text" class="form-control hidden" id="categoryId" value="{{category}}">
+            <form>
+                <div class="col-xs-12">
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control hidden" id="categoryId" value="{{category}}">
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control hidden" id="publicationId" value="{{publication}}">
+                    </div>
                 </div>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control hidden" id="publicationId" value="{{publication}}">
+                <div class="col-sm-12">
+                    <textarea class="form-control" id="canvas" style="min-height:500px;"></textarea>
                 </div>
-            </div>
-            <div class="col-sm-12">
-                <textarea class="form-control" style="min-height:500px;"></textarea>
-            </div>
-            <div class="col-xs-12 top-10">
-               <button type="submit" class="btn btn-primary pull-right">Parse and Save</button>
-            </div>
+                <div class="col-xs-12 top-10">
+                    <button type="submit" class="btn btn-primary pull-right">Parse and Save</button>
+                </div>
+            </form>
         </div>
     </div>
 </template>
