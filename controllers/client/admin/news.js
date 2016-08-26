@@ -6,6 +6,7 @@ ReloadNews = function(dateFrom,dateTo,category,publication,rating,skipCount,limi
         else{
             for(var a =0; a< result.length; a++){
                 CNews.insert({
+                    _id: result[a]._id,
                     publicationId: result[a].publicationId,
                     publicationName: result[a].publicationName,
                     categoryId: result[a].categoryId,
@@ -67,6 +68,12 @@ if(Meteor.isClient){
         }
     })
 
+    Template.editnews.helpers({
+        doc: function(){
+            return News.findOne({_id:P_newsId});
+        }
+    })
+
     Template.newnews.helpers({
         category: function(){
             return sessionStorage.getItem('selectedCategoryId');
@@ -77,6 +84,11 @@ if(Meteor.isClient){
     })
 
     Template.news.events({
+        'click .remove': function(event){
+            News.remove({_id:event.currentTarget.id});
+            ReloadNews(dateFrom,dateTo,category,publication,rating,skipCount,limit,search);
+            ReloadNewsPages(dateFrom,dateTo,category,publication,rating,limit,search);
+        },
         'click #advancebutton': function(){
           $('#advance')[0].reset();
             ToggleElement(['advancedfilters']);

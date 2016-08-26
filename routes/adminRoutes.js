@@ -33,6 +33,13 @@ Router.route('/user/newnews', function () {
     this.layout('adminLayout');
 });
 
+Router.route('/user/editnews/:_id', function () {
+    var params = this.params;
+    P_newsId = params._id;
+    this.render('editnews');
+    this.layout('adminLayout');
+});
+
 Router.route('/user/publications', function () {
     this.render('publications');
     this.layout('adminLayout');
@@ -40,6 +47,13 @@ Router.route('/user/publications', function () {
 
 Router.route('/user/newpublication', function () {
     this.render('newpublication');
+    this.layout('adminLayout');
+});
+
+Router.route('/user/editpublication/:_id', function () {
+    var params = this.params;
+    P_publicationId = params._id;
+    this.render('editpublication');
     this.layout('adminLayout');
 });
 
@@ -58,6 +72,15 @@ Router.route('/user/newcategory', function () {
     this.layout('adminLayout');
 });
 
+
+Router.route('/user/editcategory/:_id', function () {
+    var params = this.params;
+    P_categoryId = params._id;
+    this.render('editcategory');
+    this.layout('adminLayout');
+});
+
+
 Router.route('/user/categoryselect', function () {
     this.render('categoryselect');
     this.layout('adminLayout');
@@ -70,6 +93,13 @@ Router.route('/user/ratings', function () {
 
 Router.route('/user/newratings', function () {
     this.render('newratings');
+    this.layout('adminLayout');
+});
+
+Router.route('/user/editratings/:_id', function () {
+    var params = this.params;
+    P_ratingId = params._id;
+    this.render('editratings');
     this.layout('adminLayout');
 });
 

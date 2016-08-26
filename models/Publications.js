@@ -3,7 +3,8 @@ Publications = new Mongo.Collection('publications');
 Publications.attachSchema(new SimpleSchema({
 
     'name': {
-        type: String
+        type: String,
+        unique: true
     },
     'status': {
         type: String,

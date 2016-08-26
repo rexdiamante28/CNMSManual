@@ -23,8 +23,8 @@
                                         <td>{{name}}</td>
                                         <td>{{{description}}}</td>
                                         <td>
-                                            <a class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-                                            <a class="btn btn-primary btn-xs"><i class="fa fa-remove"></i></a>
+                                            <a href="editratings/{{_id}}"  class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                                            <a class="btn btn-primary btn-xs remove" id="{{_id}}"><i class="fa fa-remove"></i></a>
                                         </td>
                                     </tr>
                             {{/each}}
@@ -50,6 +50,24 @@
         <div class="row">
             <div class="col-xs-12">
                 {{> quickForm collection="Ratings"  id="insertratings" type="insert"}}
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="editratings">
+    <div class="col-xs-12 no-padd">
+        <legend>
+            <div class="row">
+                <div class="col-xs-12">
+                    Rdit Rating
+                    <a class="btn btn-primary btn-sm pull-right" href="../ratings">Back</a>
+                </div>
+            </div>
+        </legend>
+        <div class="row">
+            <div class="col-xs-12">
+                {{> quickForm collection="Ratings" doc=doc  id="updateratings" type="update"}}
             </div>
         </div>
     </div>

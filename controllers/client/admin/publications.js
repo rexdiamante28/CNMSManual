@@ -4,6 +4,19 @@ Template.publications.helpers({
     }
 })
 
+Template.publications.events({
+    'click .remove': function(event){
+        Publications.remove({_id:event.currentTarget.id});
+    }
+})
+
+Template.editpublication.helpers({
+    doc: function(){
+      return  Publications.findOne({_id:P_publicationId});
+    }
+})
+
+
 
 Template.publicationselect.helpers({
     publications: function(){

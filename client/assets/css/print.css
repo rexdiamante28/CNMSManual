@@ -10,8 +10,14 @@
         left: 0;
         top: 0;
     }
-    thead {display: table-header-group;}
-    tfoot {display: table-header-group;}
+
+    a[href]:after {
+        content: none !important;
+    }
+    a{
+        color: dodgerblue !important;
+    }
+
 }
 
 #section-to-print{
@@ -33,8 +39,9 @@ th{
 }
 #section-to-print th{
     text-align: center;
+    /*comment this one if you want printing to work on google chrome and uncomment SetupTable() in printsetup.js
     border-bottom: 1px solid black !important;
-    border-top: 1px solid black !important;
+    border-top: 1px solid black !important;*/
 }
 .blank{
     border-bottom: 1px solid black !important;
@@ -58,6 +65,24 @@ th{
     width: 40px;
     border-left: 1px solid black !important;
     border-right: 1px solid black !important;
+}
+
+.col3 p{
+    /* These are technically the same, but use both */
+    overflow-wrap: break-word !important;
+    word-wrap: break-word !important;
+
+    -ms-word-break: break-all !important;
+    /* This is the dangerous one in WebKit, as it breaks things wherever */
+    word-break: break-all !important;
+    /* Instead use this non-standard one: */
+    word-break: break-word !important;
+
+    /* Adds a hyphen where the word breaks, if supported (No Blink) */
+    -ms-hyphens: auto !important;
+    -moz-hyphens: auto !important;
+    -webkit-hyphens: auto !important;
+    hyphens: auto !important;
 }
 
 .col5{

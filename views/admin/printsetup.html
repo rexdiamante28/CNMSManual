@@ -5,7 +5,6 @@
             <div class="form-group">
                 <select type="text" id="category" class="form-control input-lg">
                     <option value="">Select One</option>
-                    <option value="All">All</option>
                     {{#each categories}}
                         <option value="{{_id}}">{{name}}</option>
                     {{/each}}
@@ -28,14 +27,20 @@
         <div class="print-container">
             <div class="row">
                 <div class="col-xs-12" id="section-to-print">
+                    <div class="text-center bottom-10">
+                        <b>MONITORING REPORT - {{categoryName}}</b><br/>
+                        <b>{{formatDateNow date 'MMMM DD, YYYY, dddd, ' }} as of 7AM</b>
+                    </div>
                     <div class="table-responsive">
                         <table id="printtable" class="print table table-striped ">
                             <thead class="text-center">
-                                <th class="col1">PUBLICATION</th>
-                                <th class="col2">PAGE</th>
-                                <th class="col3">LIGISLATIVE STORIES</th>
-                                <th class="col4">RATE</th>
-                                <th class="col5">COMMENT</th>
+                                <tr>
+                                    <th class="col1">PUBLICATION</th>
+                                    <th class="col2">PAGE</th>
+                                    <th class="col3">LEGISLATIVE STORIES</th>
+                                    <th class="col4">RATE</th>
+                                    <th class="col5">COMMENT</th>
+                                </tr>
                             </thead>
                             <tbody>
                             {{#each news}}
@@ -53,7 +58,7 @@
                                             {{#if isEqual type 'blank'}}
 
                                                 {{else}}
-                                                <a href="{{link}}" class="headline"></a><br/><br/>
+                                                <a href="{{link}}" class="headline">{{link}}</a><br/><br/>
                                             {{/if}}
                                             <p class="headline">{{summary}}</p>
                                             {{else}}
@@ -61,7 +66,7 @@
                                             {{#if isEqual type 'blank'}}
 
                                             {{else}}
-                                                <a href="{{link}}" class="non-headline"></a><br/><br/>
+                                                <a href="{{link}}" class="non-headline">{{link}}</a><br/><br/>
                                             {{/if}}
                                             <p class="non-headline">{{summary}}</p>
                                         {{/if}}

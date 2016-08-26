@@ -4,6 +4,21 @@ Template.categories.helpers({
     }
 })
 
+
+Template.categories.events({
+    'click .remove': function(event){
+        Categories.remove({_id:event.currentTarget.id});
+    }
+})
+
+
+
+Template.editcategory.helpers({
+    doc: function(){
+        return Categories.findOne({_id:P_categoryId});
+    }
+})
+
 Template.categoryselect.helpers({
     categories: function(){
         return Categories.find({});

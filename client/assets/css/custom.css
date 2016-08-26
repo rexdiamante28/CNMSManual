@@ -484,11 +484,11 @@ table th
     /*min-width:150px;*/
     white-space: nowrap;
 }
-table td
+/*table td
 {
     white-space: nowrap;
 }
-
+*/
 .no-display
 {
     display: none;

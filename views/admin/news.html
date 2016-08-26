@@ -110,8 +110,8 @@
                                 <td>{{rating}}</td>
                                 <td>{{comments}}</td>
                                 <td>
-                                    <a class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-                                    <a class="btn btn-primary btn-xs"><i class="fa fa-remove"></i></a>
+                                    <a href="editnews/{{_id}}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-primary btn-xs remove" id="{{_id}}"><i class="fa fa-remove"></i></a>
                                 </td>
                             </tr>
                         {{/each}}
@@ -179,6 +179,54 @@
             </div>
             <div class="col-sm-4 top-20">
                 <textarea class="form-control" style="min-height:500px;"></textarea>
+            </div>
+        </div>
+    </div>
+</template>
+
+
+
+<template name="editnews">
+    <div class="col-xs-12 no-padd">
+        <legend>
+            <div class="row">
+                <div class="col-xs-12">
+                    Edit News
+                    <a href="../news" class="btn btn-primary pull-right btn-sm">back</a>
+                </div>
+            </div>
+        </legend>
+        <div class="row">
+            <div class="col-sm-12">
+                {{#autoForm collection="News" doc=doc id="updatenews" type="update"}}
+                    <fieldset>
+                        <div class="col-sm-6">
+                            {{> afQuickField name='ratingId' }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{> afQuickField name='page' }}
+                        </div>
+                        <div class="col-sm-12">
+                            {{> afQuickField name='isHeadline' }}
+                        </div>
+                        <div class="col-sm-12">
+                            {{> afQuickField name='title' }}
+                        </div>
+                        <div class="col-sm-12">
+                            {{> afQuickField name='link' }}
+                        </div>
+                        <div class="col-sm-12">
+                            {{> afQuickField name='summary' }}
+                        </div>
+                        <div class="col-sm-12">
+                            {{> afQuickField name='comments' }}
+                        </div>
+                        <div class="col-sm-3">
+                            <button type="submit" class="btn btn-primary btn-block" style="margin-top: 25px;">Submit</button>
+                        </div>
+                    </fieldset>
+
+                {{/autoForm}}
             </div>
         </div>
     </div>

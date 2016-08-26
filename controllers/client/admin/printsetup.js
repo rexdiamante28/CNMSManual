@@ -57,6 +57,7 @@ ReloadNewsPrint = function(date,category){
                 })
             }
             SpinnerHide();
+            SetupTable();
         }
     });
 }
@@ -83,6 +84,7 @@ Template.printsetup.events({
         }
         else{
             sessionStorage.setItem('print_category',category);
+            sessionStorage.setItem('print_categoryname',Categories.findOne({_id:category}).name);
             sessionStorage.setItem('print_date',date);
             window.open('printnow','_blank');
             //Router.go('/user/printnow');
@@ -91,6 +93,12 @@ Template.printsetup.events({
 })
 
 Template.printnow.helpers({
+    categoryName: function(){
+        return sessionStorage.getItem('print_categoryname');
+    },
+    date: function(){
+        return new Date(sessionStorage.getItem('print_date'));
+    },
     news: function(){
         return CNews.find({});
     }
@@ -103,8 +111,5 @@ Template.printnow.onCreated(function(){
 })
 
 Template.printnow.onRendered(function(){
-    ReloadNewsPrint(date,category,function(){
-        alert("Done");
-    });
-
+    ReloadNewsPrint(date,category,function(){});
 })
