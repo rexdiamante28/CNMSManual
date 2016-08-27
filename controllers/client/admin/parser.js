@@ -21,6 +21,12 @@ Template.textparser.onCreated(function(){
     CN = new Mongo.Collection(null);
 })
 
+Template.textparser.onRendered(function(){
+    $(".lined").linedtextarea(
+        //{selectedLine: 1}
+    );
+})
+
 Template.textparser.events({
     'submit form': function(event,template){
         event.preventDefault();
@@ -34,6 +40,7 @@ Template.textparser.events({
         var entryCounter=0;
         var lineInEntry = 0;
         var validator = true;
+        var errorlines= [];
 
 
         //this will work but will assume that every input is correct
@@ -41,6 +48,10 @@ Template.textparser.events({
         for(var a = 0;a < lines.length;a++){
             if(lines[a]===""){
                 if(a+8<=lines.length){
+                    if(lines[a+8]!==""&& a+8<lines.length){
+                        validator = false;
+                        errorlines.push(a+9);
+                    }
                     //console.log("valid   "+(a+8)+"    "+lines.length+"    "+lines[a] );
                     var page = lines[a+1];
                     var rating = lines[a+2];
@@ -56,9 +67,11 @@ Template.textparser.events({
                     else
                     {
                         validator = false;
+                        errorlines.push(a+3);
                     }
                     if(isNaN(page)){
                         validator= false;
+                        errorlines.push(a+2);
                     }
                     if(headline==="T"||headline==="t"){
                        headline="TRUE";
@@ -67,6 +80,7 @@ Template.textparser.events({
                     }
                     else{
                         validator = false;
+                        errorlines.push(a+4);
                     }
                     if(comment==="--"){
                         comment="";
@@ -88,6 +102,7 @@ Template.textparser.events({
                 }
                 else{
                     validator = false;
+                    errorlines.push(a+1);
                 }
             }
         }
@@ -117,9 +132,15 @@ Template.textparser.events({
 
         }
         else{
+            $('.lineno').css({"color":"white"});
+            console.log(errorlines);
+            for(var a=0;a<errorlines.length; a++){
+                var selector = ".lineno:nth-child("+errorlines[a]+")";
+                $(selector).css({"color":"red"});
+                $(selector).attr({"title":"error"});
+            }
+            //console.log(errorlines);
             alertify.error('There is something wrong with your entry. Please re-check. If you find this difficult, use the form instead.');
         }
-
-        console.log(validator);
     }
 })
