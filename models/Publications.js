@@ -6,6 +6,7 @@ Publications.attachSchema(new SimpleSchema({
         type: String,
         unique: true
     },
+
     'status': {
         type: String,
         autoform: {
@@ -18,6 +19,15 @@ Publications.attachSchema(new SimpleSchema({
             }
         }
     },
+
+    'number': {
+        type: Number,
+        unique: true,
+        autoform: {
+            type: "text"
+        }
+    },
+
     'description':{
         type: String,
         autoform: {

@@ -6,6 +6,8 @@
     background-color: rgba(255,255,255,.7);
     padding: 20px;
     height: auto;
+    border: solid 2px black;
+
 }
 .form input, .form select{
     background-color: rgba(48,53,147,.7);
@@ -96,4 +98,8 @@
 
 .thumbimg{
     max-width: 25px !important;
+}
+
+.bigger{
+    height: 150px !important;
 }

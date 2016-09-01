@@ -1,5 +1,6 @@
 ProfileImages = new FS.Collection("profileimages", {
-    stores: [new FS.Store.FileSystem("profileimages", {path: "~/Images/profile"})]
+    //stores: [new FS.Store.FileSystem("profileimages", {path: "~/images/profile"})]
+    stores: [new FS.Store.FileSystem("profileimages", {path: Meteor.absolutePath +"/images/profile"})]
 });
 
 ProfileImages.allow({

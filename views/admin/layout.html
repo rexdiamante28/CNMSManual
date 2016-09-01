@@ -1,6 +1,6 @@
 <template name="adminLayout">
     <div class="adminBody">
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -9,7 +9,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/user/dashboard">Dashboard</a>
+                    <a class="navbar-brand" href="/user/dashboard">Home</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -17,7 +17,7 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-rss _17"></i> News Reports<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="/user/news">News</a></li>
+                                <li><a href="/user/newsnow">News</a></li>
                                 <li><a href="/user/categories">Categories</a></li>
                                 <li><a href="/user/publications">Publications</a></li>
                                 <li><a href="/user/ratings">Ratings</a></li>
@@ -26,7 +26,7 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-users _17"></i> Users<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <!--<li><a href="/user/allusers">All Users</a></li>-->
+                                <li><a href="/user/allusers">All Users</a></li>
                                 <li><a href="/user/addnewuser">New User</a></li>
                             </ul>
                         </li>
@@ -39,7 +39,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img class="thumbimg" src="/defaultavatar.png"> {{user.profile.name}}<span class="caret"></span></a>
                             {{/if}}
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Change Password</a></li>
+                                <li><a href="/user/changepassword">Change Password</a></li>
                                 <li><a href="#" class="logout">Log Out</a></li>
                             </ul>
                         </li>

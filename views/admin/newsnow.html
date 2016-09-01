@@ -1,0 +1,71 @@
+<template name="newsnow">
+    <div class="col-xs-12 no-padd">
+        <legend>
+            <div class="row">
+                <div class="col-xs-12">
+                    News Today
+                    <a href="categoryselect" class="btn btn-success pull-right btn-sm">Add New</a>
+                    <a href="printsetup" class="btn btn-success pull-right btn-sm">Print Report</a>
+                    <a href="categoryselect" class="btn btn-success pull-right btn-sm">News Yesterday</a>
+                </div>
+            </div>
+        </legend>
+        <div class="row">
+            <div class="col-xs-12">
+                <form id="newstodayform">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input class="form-control" type="date" value="" id="date">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <select class="form-control" id="category">
+                                <option value="">Select one</option>
+                                {{#each categories}}
+                                    <option value="{{_id}}">{{name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="col-sm-12">
+                {{>spinner}}
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <th>Publication</th>
+                        <th>Page</th>
+                        <th>Headline</th>
+                        <th>Rate</th>
+                        <th>Updated By</th>
+                        <th>Comments</th>
+                        <th>Actions</th>
+                        </thead>
+                        <tbody>
+                        {{#each news}}
+                            <tr>
+                                <td>{{publicationName}}</td>
+                                <td>{{page}}</td>
+                                <td>
+                                    <a class="point" target="_blank" href="{{link}}"><label>{{title}}</label></a>
+                                    <p>{{StringLimit 40 summary}}</p>
+                                </td>
+                                <td>{{rating}}</td>
+                                <td>{{reportedBy}}</td>
+                                <td>{{comments}}</td>
+                                <td>
+                                    <a target="_blank" href="editnews/{{_id}}" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-success btn-xs remove" id="{{_id}}"><i class="fa fa-remove"></i></a>
+                                </td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

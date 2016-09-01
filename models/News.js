@@ -1,29 +1,39 @@
 News = new Mongo.Collection('news');
 
 News.after.insert(function (userId, doc) {
-    News.update({_id:doc._id},{
-        $set:{
-            publicationName: Publications.findOne({_id:doc.publicationId}).name,
-            categoryName: Categories.findOne({_id:doc.categoryId}).name,
-            rating: Ratings.findOne({_id:doc.ratingId}).name,
-            reportedById: Meteor.userId(),
-            reportedBy: Meteor.user().profile.name,
-            inserted: new Date()
-        }
-    });
+    if(doc._id!==undefined){
+        News.update({_id:doc._id},{
+            $set:{
+                publicationName: Publications.findOne({_id:doc.publicationId}).name,
+                categoryName: Categories.findOne({_id:doc.categoryId}).name,
+                rating: Ratings.findOne({_id:doc.ratingId}).name,
+                reportedById: Meteor.userId(),
+                reportedBy: Meteor.user().profile.name,
+                inserted: new Date()
+            }
+        });
+    }
 });
 
-/*News.after.update(function (userId, doc, fieldNames, modifier, options) {
-    News.update({_id:doc._id},{
-        $set:{
-            publicationName: Publications.findOne({_id:doc.publicationId}).name,
-            categoryName: Categories.findOne({_id:doc.categoryId}).name,
-            rating: Ratings.findOne({_id:doc.ratingId}).name,
-            reportedById: Meteor.userId(),
-            reportedBy: Meteor.user().profile.name
-        }
-    });
-});*/
+News.after.update(function (userId, doc, fieldNames, modifier, options) {
+    if(userId!==doc.reportedById){
+        News.update({_id:doc._id},{
+            $set:{
+                reportedBy:Meteor.user().profile.name,
+                reportedById: Meteor.userId()
+            }
+        })
+        console.log("updated");
+    }
+    if(Ratings.findOne({_id:doc.ratingId}).name!==doc.rating){
+        News.update({_id:doc._id},{
+            $set:{
+                rating:Ratings.findOne({_id:doc.ratingId}).name
+            }
+        })
+    }
+
+});
 
 News.attachSchema(new SimpleSchema({
 
@@ -63,6 +73,7 @@ News.attachSchema(new SimpleSchema({
     },
     'ratingId':{
         type: String,
+        optional: true,
         autoform: {
             afFieldInput: {
                 type: 'select',
@@ -88,6 +99,15 @@ News.attachSchema(new SimpleSchema({
         autoform: {
             afFieldInput: {
                 type: 'boolean-checkbox'
+            }
+        }
+    },
+    'author':{
+        type: String,
+        optional: true,
+        autoform: {
+            afFieldInput: {
+                type: 'text'
             }
         }
     },

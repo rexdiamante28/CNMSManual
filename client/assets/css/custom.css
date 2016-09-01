@@ -28,6 +28,7 @@
 
 /*styles for font-family*/
 .helvetica{font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 100;}
+.arial { font-family: 'Arial', 'Arial Bold', Gadget, sans-serif;}
 .georgia{font-family: Georgia, serif}
 .palatino{font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif}
 .times{font-family: "Times New Roman", Times, serif}

@@ -29,7 +29,6 @@ meteorhacks:kadira
 sacha:spin
 accounts-password
 insecure
-autopublish
 cfs:standard-packages
 cfs:filesystem
 cfs:ui
@@ -39,3 +38,4 @@ aldeed:autoform
 mpowaga:autoform-summernote
 matb33:collection-hooks
 bootswatch:flatly
+autopublish

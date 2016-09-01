@@ -14,9 +14,8 @@
     a[href]:after {
         content: none !important;
     }
-    a{
-        color: dodgerblue !important;
-    }
+
+
 
 }
 
@@ -48,7 +47,7 @@ th{
     border-top: 1px solid black !important;
 }
 .col1{
-    width: 110px;
+    width: 120px;
     border-left: 1px solid black !important;
 }
 
@@ -56,13 +55,14 @@ th{
     border-bottom: 1px solid white !important;
 }
 .col2{
-    width: 40px;
+    width: 60px;
     border-left: 1px solid black !important;
     border-right: 1px solid black !important;
 }
 
+
 .col4{
-    width: 40px;
+    width: 60px;
     border-left: 1px solid black !important;
     border-right: 1px solid black !important;
 }
@@ -91,12 +91,12 @@ th{
 }
 
 .headline{
-    font-size: 14px !important;
-    font-weight: bold !important;
+    font-size: 17px !important;
+    line-height: 100%;
 }
 
 .non-headline{
-    font-size: 12px !important;
+    font-size: 14px !important;
 }
 
 #section-to-print tbody td{
@@ -121,6 +121,17 @@ th{
     margin-bottom: 0px !important;
 }
 
+#printtable{
+    table-layout:fixed !important;
+}
+
+.fauxRow:nth-child(1) th{
+    border: solid 1px black !important;
+}
+
+.fauxRow:nth-last-child(1) tbody tr td table tbody tr{
+    border-bottom: solid 1px black !important;
+}
 /******************************************/
 
 div.fauxRow {

@@ -5,6 +5,7 @@ ReloadNewsPrint = function(date,category){
         if(error){alert(error.message)}
         else{
             var type = "";
+            var isheadline = "";
             for(var a =0; a< result.length; a++){
                 if(a==0){
                     type = "new";
@@ -16,7 +17,7 @@ ReloadNewsPrint = function(date,category){
                     }
                 }
 
-                if(type==="new"&&a>0){
+                /*if(type==="new"&&a>0){
                     CNews.insert({
                         publicationId: "",
                         publicationName: "",
@@ -35,7 +36,14 @@ ReloadNewsPrint = function(date,category){
                         inserted: "",
                         type: "blank"
                     })
+                }*/
+
+                if(type==="new" && result[a].isHeadline==="TRUE"){
+                    isheadline = "TRUE";
+                }else{
+                    isheadline = "FALSE";
                 }
+
 
                 CNews.insert({
                     publicationId: result[a].publicationId,
@@ -45,7 +53,8 @@ ReloadNewsPrint = function(date,category){
                     ratingId: result[a].ratingId,
                     rating: result[a].rating,
                     page: result[a].page,
-                    isHeadline: result[a].isHeadline,
+                    isHeadline: isheadline,
+                    author: result[a].author,
                     title: result[a].title,
                     link: result[a].link,
                     summary: result[a].summary,
@@ -53,7 +62,8 @@ ReloadNewsPrint = function(date,category){
                     reportedById: result[a].reportedById,
                     reportedBy: result[a].reportedBy,
                     inserted: result[a].inserted,
-                    type: type
+                    type: type,
+                    publicationNumber: Publications.findOne({_id:result[a].publicationId}).number
                 })
             }
             SpinnerHide();
@@ -100,7 +110,7 @@ Template.printnow.helpers({
         return new Date(sessionStorage.getItem('print_date'));
     },
     news: function(){
-        return CNews.find({});
+        return CNews.find({},{sort:{publicationNumber:1}});
     }
 })
 

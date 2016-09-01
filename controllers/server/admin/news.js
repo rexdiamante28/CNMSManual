@@ -1,7 +1,14 @@
 if(Meteor.isServer){
     Meteor.methods({
         'getNews': function(datefrom,dateTo,category,publication,rate,skip,limit,search){
-            console.log(rate);
+            if(datefrom!=="" &&dateTo!==""){
+                datefrom = new Date(datefrom);
+                dateTo = new Date(dateTo);
+                dateTo.setDate(dateTo.getDate()+1);
+                dateTo = new Date(dateTo);
+            }
+
+
             if(search=="" && datefrom == "" && dateTo == "" && publication == "" && rate == ""  && category == "" ){
                 console.log("parameters are empty");
                 return News.find({}, {
@@ -44,8 +51,10 @@ if(Meteor.isServer){
                         {reportedBy: new RegExp(search,"i")},
                         {categoryName: new RegExp(search, "i")}
                     ],
-                    inserted:{$gte:datefrom},
-                    inserted:{$lte:dateTo},
+                    inserted:{
+                        $lt:dateTo,
+                        $gte:datefrom
+                    },
                     publicationName: publication,
                     rating: rate,
                     categoryName: category
@@ -60,8 +69,10 @@ if(Meteor.isServer){
                 datefrom = new Date(datefrom);
                 dateTo = new Date(dateTo);
                 return News.find({
-                    inserted:{$gte:datefrom},
-                    inserted:{$lte:dateTo},
+                    inserted:{
+                        $lt:dateTo,
+                        $gte:datefrom
+                    },
                     publicationName: publication,
                     rating: rate,
                     categoryName: category

@@ -36,3 +36,12 @@ UI.registerHelper('isEqual', function(value1,value2) {
         return false;
     }
 });
+
+UI.registerHelper('isUnequal', function(value1,value2) {
+    if(value1===value2){
+        return false;
+    }else
+    {
+        return true;
+    }
+});

@@ -4,9 +4,9 @@
             <div class="row">
                 <div class="col-xs-12">
                     News
-                    <a href="categoryselect" class="btn btn-primary pull-right btn-sm">Add New</a>
-                    <a href="printsetup" class="btn btn-primary pull-right btn-sm">Print Report</a>
-                    <button id="advancebutton" class="btn btn-primary pull-right btn-sm">Advanced Filter</button>
+                    <a href="categoryselect" class="btn btn-success pull-right btn-sm">Add New</a>
+                    <a href="printsetup" class="btn btn-success pull-right btn-sm">Print Report</a>
+                    <button id="advancebutton" class="btn btn-success pull-right btn-sm">Advanced Filter</button>
                 </div>
             </div>
         </legend>
@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div class="col-md-9">
-                    <button type="submit" class="btn btn-primary pull-right">Search</button>
+                    <button type="submit" class="btn btn-success pull-right">Search</button>
                 </div>
             </div>
         </div>
@@ -95,6 +95,7 @@
                         <th>Page</th>
                         <th>Headline</th>
                         <th>Rate</th>
+                        <th>Updated By</th>
                         <th>Comments</th>
                         <th>Actions</th>
                         </thead>
@@ -104,14 +105,15 @@
                                 <td>{{publicationName}}</td>
                                 <td>{{page}}</td>
                                 <td>
-                                    <a href="{{link}}"><label>{{title}}</label></a>
+                                    <a class="point" target="_blank" href="{{link}}"><label>{{title}}</label></a>
                                     <p>{{StringLimit 40 summary}}</p>
                                 </td>
                                 <td>{{rating}}</td>
+                                <td>{{reportedBy}}</td>
                                 <td>{{comments}}</td>
                                 <td>
-                                    <a href="editnews/{{_id}}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-                                    <a class="btn btn-primary btn-xs remove" id="{{_id}}"><i class="fa fa-remove"></i></a>
+                                    <a target="_blank" href="editnews/{{_id}}" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-success btn-xs remove" id="{{_id}}"><i class="fa fa-remove"></i></a>
                                 </td>
                             </tr>
                         {{/each}}
@@ -134,8 +136,8 @@
             <div class="row">
                 <div class="col-xs-12">
                     New News Report
-                    <a href="news" class="btn btn-primary pull-right btn-sm">back</a>
-                    <a href="textparser" class="btn btn-primary pull-right btn-sm">Use Text Parser</a>
+                    <a href="news" class="btn btn-success pull-right btn-sm">back</a>
+                    <a href="textparser" class="btn btn-success pull-right btn-sm">Use Text Parser</a>
                 </div>
             </div>
         </legend>
@@ -155,8 +157,11 @@
                         <div class="col-sm-6">
                             {{> afQuickField name='page' }}
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             {{> afQuickField name='isHeadline' }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{> afQuickField name='author' }}
                         </div>
                         <div class="col-sm-12">
                             {{> afQuickField name='title' }}
@@ -165,13 +170,13 @@
                             {{> afQuickField name='link' }}
                         </div>
                         <div class="col-sm-12">
-                            {{> afQuickField name='summary' }}
+                            {{> afQuickField name='summary' class="bigger"}}
                         </div>
                         <div class="col-sm-12">
                             {{> afQuickField name='comments' }}
                         </div>
                         <div class="col-sm-3">
-                            <button type="submit" class="btn btn-primary btn-block" style="margin-top: 25px;">Submit</button>
+                            <button type="submit" class="btn btn-success btn-block" style="margin-top: 25px;">Submit</button>
                         </div>
                     </fieldset>
 
@@ -192,7 +197,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     Edit News
-                    <a href="../news" class="btn btn-primary pull-right btn-sm">back</a>
+                    <a href="../news" class="btn btn-success pull-right btn-sm">back</a>
                 </div>
             </div>
         </legend>
@@ -206,8 +211,11 @@
                         <div class="col-sm-6">
                             {{> afQuickField name='page' }}
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             {{> afQuickField name='isHeadline' }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{> afQuickField name='author' }}
                         </div>
                         <div class="col-sm-12">
                             {{> afQuickField name='title' }}
@@ -222,7 +230,7 @@
                             {{> afQuickField name='comments' }}
                         </div>
                         <div class="col-sm-3">
-                            <button type="submit" class="btn btn-primary btn-block" style="margin-top: 25px;">Submit</button>
+                            <button type="submit" class="btn btn-success btn-block" style="margin-top: 25px;">Submit</button>
                         </div>
                     </fieldset>
 

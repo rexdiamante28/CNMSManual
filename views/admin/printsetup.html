@@ -14,7 +14,7 @@
                 <input type="date" id="date" class="form-control input-lg">
             </div>
             <div class="form-group">
-                <button class="btn btn-block btn-primary btn-lg">Print</button>
+                <button class="btn btn-block btn-success btn-lg">Print</button>
             </div>
         </form>
     </div>
@@ -31,7 +31,7 @@
                         <b>MONITORING REPORT - {{categoryName}}</b><br/>
                         <b>{{formatDateNow date 'MMMM DD, YYYY, dddd, ' }} as of 7AM</b>
                     </div>
-                    <div class="table-responsive">
+                    <div class="">
                         <table id="printtable" class="print table table-striped ">
                             <thead class="text-center">
                                 <tr>
@@ -44,7 +44,7 @@
                             </thead>
                             <tbody>
                             {{#each news}}
-                                <tr class="{{type}}">
+                                <tr class="{{type}} arial">
                                     {{#if isEqual type 'new'}}
                                             <td class="col1">{{publicationName}}</td>
                                         {{else}}
@@ -57,18 +57,26 @@
                                             <label class="headline">{{title}}</label><br/>
                                             {{#if isEqual type 'blank'}}
 
-                                                {{else}}
+                                            {{else}}
                                                 <a href="{{link}}" class="headline">{{link}}</a><br/><br/>
                                             {{/if}}
-                                            <p class="headline">{{summary}}</p>
+                                            {{#if isUnequal undefined author}}
+                                                <p class="headline">{{summary}}<br/>- {{author}}</p>
                                             {{else}}
+                                                <p class="headline">{{summary}}</p>
+                                            {{/if}}
+                                        {{else}}
                                             <label class="non-headline">{{title}}</label><br/>
                                             {{#if isEqual type 'blank'}}
 
                                             {{else}}
                                                 <a href="{{link}}" class="non-headline">{{link}}</a><br/><br/>
                                             {{/if}}
-                                            <p class="non-headline">{{summary}}</p>
+                                            {{#if isUnequal undefined author}}
+                                                <p class="non-headline">{{summary}}<br/>- {{author}}</p>
+                                            {{else}}
+                                                <p class="non-headline">{{summary}}</p>
+                                            {{/if}}
                                         {{/if}}
                                     </td>
                                     <td class="col4">{{rating}}</td>

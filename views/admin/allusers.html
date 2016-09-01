@@ -1,0 +1,46 @@
+<template name="allusers">
+    <div class="col-xs-12 no-padd">
+        <legend>
+            <div class="row">
+                <div class="col-xs-12">
+                    All Users
+                </div>
+            </div>
+        </legend>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                        </thead>
+                        <tbody>
+                        {{#each users}}
+                            <tr>
+                                <td>
+                                    {{#if isEqual profile.avatar ""}}
+                                        <img src="/defaultavatar.png" class="thumbimg">
+                                        {{else}}
+                                        <img src="{{profile.avatar}}" class="thumbimg">
+                                    {{/if}}
+
+                                    {{profile.name}}
+                                </td>
+                                <td>{{username}}</td>
+                                <th>{{emails.[0].address}}</th>
+                                <td>
+                                    <a href="editratings/{{_id}}"  class="btn btn-success btn-xs"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-success btn-xs remove" id="{{_id}}"><i class="fa fa-remove"></i></a>
+                                </td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

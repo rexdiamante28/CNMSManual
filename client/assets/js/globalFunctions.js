@@ -17,3 +17,7 @@ SpinnerShow = function(){
 ClickNow = function(id){
     $(id).click();
 }
+
+FormatDate =  function(date) {
+    return moment(date).format('YYYY-MM-DD');
+}

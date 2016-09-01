@@ -65,6 +65,12 @@ if(Meteor.isClient){
         },
         ratings: function(){
             return Ratings.find({});
+        },
+        categories: function(){
+            return Categories.find({});
+        },
+        publications: function(){
+            return Publications.find({});
         }
     })
 

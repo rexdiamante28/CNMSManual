@@ -1,6 +1,6 @@
 Template.publications.helpers({
     publications: function(){
-       return Publications.find({});
+       return Publications.find({},{sort:{number:1}});
     }
 })
 
