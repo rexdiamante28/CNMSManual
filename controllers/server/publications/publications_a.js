@@ -56,4 +56,8 @@ if(Meteor.isServer){
             return Accounts.users.find({_id:id});
         }
     })
+
+    Meteor.publish('news',function(){
+        return News.find({});
+    })
 }

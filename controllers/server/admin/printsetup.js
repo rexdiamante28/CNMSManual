@@ -1,6 +1,9 @@
 if(Meteor.isServer){
     Meteor.methods({
         'getNewsPrint': function(date,category){
+
+            console.log(date+"   "+category);
+
             var date = new Date(date);
             var tomorrow = new Date(date);
             tomorrow.setDate(tomorrow.getDate()+1);

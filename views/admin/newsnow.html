@@ -6,7 +6,7 @@
                     News Today
                     <a href="categoryselect" class="btn btn-success pull-right btn-sm">Add New</a>
                     <a href="printsetup" class="btn btn-success pull-right btn-sm">Print Report</a>
-                    <a href="categoryselect" class="btn btn-success pull-right btn-sm">News Yesterday</a>
+                    <a href="news" class="btn btn-success pull-right btn-sm">Archive</a>
                 </div>
             </div>
         </legend>
@@ -40,7 +40,7 @@
                         <th>Page</th>
                         <th>Headline</th>
                         <th>Rate</th>
-                        <th>Updated By</th>
+                        <!--<th>Updated By</th>-->
                         <th>Comments</th>
                         <th>Actions</th>
                         </thead>
@@ -50,20 +50,59 @@
                                 <td>{{publicationName}}</td>
                                 <td>{{page}}</td>
                                 <td>
-                                    <a class="point" target="_blank" href="{{link}}"><label>{{title}}</label></a>
+                                    <a target="_blank" href="{{link}}"><label>{{title}}</label></a>
                                     <p>{{StringLimit 40 summary}}</p>
                                 </td>
-                                <td>{{rating}}</td>
-                                <td>{{reportedBy}}</td>
-                                <td>{{comments}}</td>
                                 <td>
-                                    <a target="_blank" href="editnews/{{_id}}" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i></a>
-                                    <a class="btn btn-success btn-xs remove" id="{{_id}}"><i class="fa fa-remove"></i></a>
+                                    <select id="{{newsId}}" class="selectrating" name="{{newsId}}">
+                                        <option value=""></option>
+                                        {{#each ratings}}
+                                            {{#if isEqual ../rating name}}
+                                                <option selected="true" value="{{_id}}">{{name}}</option>
+                                                {{else}}
+                                                <option value="{{_id}}">{{name}}</option>
+                                            {{/if}}
+                                        {{/each}}
+                                    </select>
+                                </td>
+                                <!--<td>{{reportedBy}}</td>-->
+                                <td id="comment{{newsId}}">{{comments}}</td>
+                                <td>
+                                    <button data-toggle="modal" data-target="#commentmodal" id="{{newsId}}" class="commentButton btn btn-xs btn-success" ><i class="fa fa-list"></i></button>
+                                    <a target="_blank" href="editnews/{{newsId}}" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-success btn-xs remove" id="{{newsId}}"><i class="fa fa-remove"></i></a>
                                 </td>
                             </tr>
                         {{/each}}
                         </tbody>
                     </table>
+                </div>
+            </div>
+
+
+            <div id="commentmodal" class="modal fade bs-example-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Update Comment</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="commentform">
+                                <div class="form-group">
+                                    <input type="text" id="modalNewsId" class="hidden">
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" style="height:200px;" id="modalComment"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success">Save</button>
+                                    <button type="button" id="commentModalClose" data-dismiss="modal" class="btn btn-default">Close</button>
+                                </div>
+                            </form>
+
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

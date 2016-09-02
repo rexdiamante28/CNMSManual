@@ -59,6 +59,8 @@ Router.route('/user/news', function () {
 
 Router.route('/user/newnews', function () {
     Meteor.subscribe('ratings',"");
+    Meteor.subscribe('categories',"");
+    Meteor.subscribe('publications',"");
     this.render('newnews');
     this.layout('adminLayout');
 });
@@ -156,7 +158,10 @@ Router.route('/user/printnow', function () {
 });
 
 Router.route('/user/newsnow', function () {
+    Meteor.subscribe('categories',"");
     Meteor.subscribe('publications',"");
+    Meteor.subscribe('ratings',"");
+    Meteor.subscribe('news');
     this.render('newsnow');
     this.layout('adminLayout');
 });

@@ -1,7 +1,7 @@
-ReloadNewsPrint = function(date,category){
+ReloadNewsPrint1 = function(date,category){
     SpinnerShow();
     Meteor.call('getNewsPrint',date,category,function(error,result){
-        CNews.remove({});
+        CNews1.remove({});
         if(error){alert(error.message)}
         else{
             var type = "";
@@ -18,7 +18,7 @@ ReloadNewsPrint = function(date,category){
                 }
 
                 /*if(type==="new"&&a>0){
-                 CNews.insert({
+                 CNews1.insert({
                  publicationId: "",
                  publicationName: "",
                  categoryId: "",
@@ -45,7 +45,8 @@ ReloadNewsPrint = function(date,category){
                 }
 
 
-                CNews.insert({
+                CNews1.insert({
+                    newsId: result[a]._id,
                     publicationId: result[a].publicationId,
                     publicationName: result[a].publicationName,
                     categoryId: result[a].categoryId,
@@ -75,16 +76,82 @@ ReloadNewsPrint = function(date,category){
 Template.newsnow.helpers({
     categories: function(){
         return Categories.find({});
+    },
+    news: function(){
+        return CNews1.find({},{sort:{publicationNumber:1}});
+    },
+    ratings: function(){
+        return  Ratings.find({});
     }
 })
 
 Template.newsnow.onCreated(function(){
-    CNews = new Mongo.Collection(null);
+    CNews1 = new Mongo.Collection(null);
     date = new Date();
     category = "";
 })
 
 Template.newsnow.onRendered(function(){
-    ReloadNewsPrint(date,category,function(){});
+    date = FormatDate(new Date());
     $('#date').val(FormatDate(new Date()));
+    ReloadNewsPrint1(date,category,function(){});
+})
+
+Template.newsnow.events({
+    'change #category': function(event){
+        category = event.currentTarget.value;
+        ReloadNewsPrint1(date,category,function(){});
+    },
+    'change #date': function(event){
+        date = event.currentTarget.value;
+        ReloadNewsPrint1(date,category,function(){});
+    },
+    'change .selectrating': function(event){
+        Meteor.call('updateRatings',event.currentTarget.name, event.currentTarget.value ,function(error,result){
+            if(error){
+                alertify.error("Something went wrong. "+error.message);
+            }
+            else{
+                alertify.success("Rating changed.");
+            }
+        });
+    },
+    'submit #commentmodal': function(event,template){
+        event.preventDefault();
+        $('#commentModalClose').click();
+        var newsId = template.find('#modalNewsId').value;
+        var comment = template.find('#modalComment').value;
+
+        Meteor.call('updateComment',newsId,comment, function(error,result){
+            if(error){
+                alertify.error("Something went wrong. "+error.message);
+            }
+            else{
+                Meteor.call('getComment',newsId,function(error,result){
+                    if(error){
+                        $('#modalComment').val("There is an error fetching the comment.");
+                    }
+                    else{
+                        var id = '#comment'+newsId;
+                        $(id).html(result);
+                        console.log($(id));
+                    }
+                });
+                alertify.success("Comment updated.");
+            }
+        });
+
+    },
+    'click .commentButton': function(event){
+        var newsId = event.currentTarget.id;
+        $('#modalNewsId').val(newsId);
+        Meteor.call('getComment',newsId,function(error,result){
+            if(error){
+                $('#modalComment').val("There is an error fetching the comment.");
+            }
+            else{
+                $('#modalComment').val(result);
+            }
+        });
+    }
 })

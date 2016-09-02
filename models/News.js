@@ -2,16 +2,33 @@ News = new Mongo.Collection('news');
 
 News.after.insert(function (userId, doc) {
     if(doc._id!==undefined){
-        News.update({_id:doc._id},{
-            $set:{
-                publicationName: Publications.findOne({_id:doc.publicationId}).name,
-                categoryName: Categories.findOne({_id:doc.categoryId}).name,
-                rating: Ratings.findOne({_id:doc.ratingId}).name,
-                reportedById: Meteor.userId(),
-                reportedBy: Meteor.user().profile.name,
-                inserted: new Date()
-            }
-        });
+        if(doc.ratingId===undefined){
+            console.log(doc.publicationId);
+            News.update({_id:doc._id},{
+                $set:{
+                    publicationName: Publications.findOne({_id:doc.publicationId}).name,
+                    categoryName: Categories.findOne({_id:doc.categoryId}).name,
+                    reportedById: Meteor.userId(),
+                    reportedBy: Meteor.user().profile.name,
+                    inserted: new Date(),
+                    isHeadline: Categories.findOne({_id:doc.categoryId}).isHeadline
+                }
+            });
+        }
+        else{
+            News.update({_id:doc._id},{
+                $set:{
+                    publicationName: Publications.findOne({_id:doc.publicationId}).name,
+                    categoryName: Categories.findOne({_id:doc.categoryId}).name,
+                    rating: Ratings.findOne({_id:doc.ratingId}).name,
+                    reportedById: Meteor.userId(),
+                    reportedBy: Meteor.user().profile.name,
+                    inserted: new Date(),
+                    isHeadline: Categories.findOne({_id:doc.categoryId}).isHeadline
+                }
+            });
+        }
+
     }
 });
 
@@ -25,13 +42,16 @@ News.after.update(function (userId, doc, fieldNames, modifier, options) {
         })
         console.log("updated");
     }
-    if(Ratings.findOne({_id:doc.ratingId}).name!==doc.rating){
-        News.update({_id:doc._id},{
-            $set:{
-                rating:Ratings.findOne({_id:doc.ratingId}).name
-            }
-        })
+    if(doc.ratingId!==undefined){
+        if(Ratings.findOne({_id:doc.ratingId}).name!==doc.rating){
+            News.update({_id:doc._id},{
+                $set:{
+                    rating:Ratings.findOne({_id:doc.ratingId}).name
+                }
+            })
+        }
     }
+
 
 });
 
@@ -96,6 +116,7 @@ News.attachSchema(new SimpleSchema({
     },
     'isHeadline':{
         type: String,
+        optional: true,
         autoform: {
             afFieldInput: {
                 type: 'boolean-checkbox'

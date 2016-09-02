@@ -7,6 +7,7 @@
                     <a href="categoryselect" class="btn btn-success pull-right btn-sm">Add New</a>
                     <a href="printsetup" class="btn btn-success pull-right btn-sm">Print Report</a>
                     <button id="advancebutton" class="btn btn-success pull-right btn-sm">Advanced Filter</button>
+                    <a href="newsnow" class="btn btn-success pull-right btn-sm">Working Area</a>
                 </div>
             </div>
         </legend>
@@ -142,7 +143,7 @@
             </div>
         </legend>
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-12">
                 {{#autoForm collection="News" id="insertnews" type="insert"}}
                     <fieldset>
                         <div class="col-sm-6">
@@ -151,16 +152,13 @@
                         <div class="col-sm-6">
                             {{> afQuickField name='categoryId' value=category  type='hidden' }}
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             {{> afQuickField name='ratingId' }}
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             {{> afQuickField name='page' }}
                         </div>
-                        <div class="col-sm-6">
-                            {{> afQuickField name='isHeadline' }}
-                        </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             {{> afQuickField name='author' }}
                         </div>
                         <div class="col-sm-12">
@@ -182,9 +180,6 @@
 
                 {{/autoForm}}
             </div>
-            <div class="col-sm-4 top-20">
-                <textarea class="form-control" style="min-height:500px;"></textarea>
-            </div>
         </div>
     </div>
 </template>
@@ -205,16 +200,13 @@
             <div class="col-sm-12">
                 {{#autoForm collection="News" doc=doc id="updatenews" type="update"}}
                     <fieldset>
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             {{> afQuickField name='ratingId' }}
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             {{> afQuickField name='page' }}
                         </div>
-                        <div class="col-sm-6">
-                            {{> afQuickField name='isHeadline' }}
-                        </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             {{> afQuickField name='author' }}
                         </div>
                         <div class="col-sm-12">
